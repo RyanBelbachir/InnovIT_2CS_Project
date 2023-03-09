@@ -1,0 +1,23 @@
+{
+  "name": "innovit",
+  "version": "1.0.0",
+  "description": "backend",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RyanBelbachir/InnovIT_2CS_Project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RyanBelbachir/InnovIT_2CS_Project/issues"
+  },
+  "homepage": "https://github.com/RyanBelbachir/InnovIT_2CS_Project#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
