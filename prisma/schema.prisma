@@ -1,11 +1,135 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+model categorie {
+  id        Int     @id @default(autoincrement())
+  categorie String? @db.VarChar(120)
+}
+
+model categoryrecette {
+  id          Int     @id @default(autoincrement())
+  description String? @db.VarChar(120)
+}
+
+model commande {
+  id        Int  @id @default(autoincrement())
+  idRecette Int?
+  idTopping Int?
+
+  @@index([idRecette], map: "idRecette")
+  @@index([idTopping], map: "idTopping")
+}
+
+model distributeur {
+  id             Int  @id @default(autoincrement())
+  capaciteGoblet Int?
+  capaciteSucre  Int?
+  capaciteSpoon  Int?
+}
+
+model entrepise {
+  id      Int     @id @default(autoincrement())
+  nom     String? @db.VarChar(120)
+  adresse String? @db.VarChar(120)
+  mail    String? @db.VarChar(120)
+  tel     String? @db.VarChar(120)
+  link    String? @db.VarChar(120)
+}
+
+model facture {
+  id            Int  @id @default(autoincrement())
+  idDistr       Int?
+  idComm        Int?
+  idInfoPaiment Int?
+
+  @@index([idComm], map: "idComm")
+  @@index([idDistr], map: "idDistr")
+  @@index([idInfoPaiment], map: "idInfoPaiment")
+}
+
+model infopaiment {
+  id           Int     @id @default(autoincrement())
+  mail         String? @db.VarChar(120)
+  cartePaiment String? @db.VarChar(120)
+}
+
+model pack {
+  id           Int     @id @default(autoincrement())
+  codeverou    String? @db.VarChar(120)
+  localisation String? @db.VarChar(120)
+  state        String? @db.VarChar(120)
+  idEntre      Int?
+
+  @@index([idEntre], map: "idEntre")
+}
+
+model publicite {
+  id          Int     @id @default(autoincrement())
+  url         String? @db.VarChar(120)
+  idCategorie Int?
+  idAnnonceur Int?
+
+  @@index([idAnnonceur], map: "idAnnonceur")
+  @@index([idCategorie], map: "idCategorie")
+}
+
+model recette {
+  id             Int     @id @default(autoincrement())
+  idCategRecette Int?
+  description    String? @db.VarChar(120)
+  prixUnit       Int?
+
+  @@index([idCategRecette], map: "idCategRecette")
+}
+
+model reclamation {
+  id        Int     @id @default(autoincrement())
+  idFacture Int?
+  message   String? @db.VarChar(120)
+  isDone    Int?
+
+  @@index([idFacture], map: "idFacture")
+}
+
+model task {
+  id      Int     @id @default(autoincrement())
+  idDistr Int?
+  idUser  Int?
+  idEntre Int?
+  type    Int?
+  isDone  Int?
+  message String? @db.VarChar(120)
+
+  @@index([idDistr], map: "idDistr")
+  @@index([idEntre], map: "idEntre")
+  @@index([idUser], map: "idUser")
+}
+
+model toppings {
+  id          Int     @id @default(autoincrement())
+  description String? @db.VarChar(120)
+  prixUnit    Int?
+}
+
+model users {
+  id           Int     @id @default(autoincrement())
+  nom          String? @db.VarChar(120)
+  prenom       String? @db.VarChar(120)
+  mail         String? @db.VarChar(120)
+  mdp          String? @db.VarChar(120)
+  tel          String? @db.VarChar(120)
+  role         Int?
+  idCreatedpar Int?
+  idEntreprise Int?
+  isDeleted    Int?
+  isActive     Int?
+
+  @@index([idCreatedpar], map: "idCreatedpar")
+  @@index([idEntreprise], map: "idEntreprise")
 }
