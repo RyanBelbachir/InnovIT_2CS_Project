@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/RyanBelbachir/InnovIT_2CS_Project#readme",
   "devDependencies": {
-    "nodemon": "^2.0.21"
+    "jasmine": "^4.5.0",
+    "nodemon": "^2.0.21",
+    "supertest": "^6.3.3"
   }
 }
