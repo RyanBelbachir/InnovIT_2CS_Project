@@ -15,7 +15,7 @@ const prisma = new PrismaClient()
 export async function getDrinkCategory(idCategory) {
     const drinks = await prisma.recette.findMany({
         where : {
-            idCategRecette:idCategory
+            idCategRecette:idCategory["id"]
         }
     })
     return drinks
@@ -27,7 +27,7 @@ export async function getCategories() {
 export async function getDrinkInfo(idDrink){
     const drink = await prisma.recette.findUnique({
         where : {
-            id:idDrink
+            id:idDrink["id"]
         }
     })
     return drink
@@ -35,6 +35,15 @@ export async function getDrinkInfo(idDrink){
 
 export async function getToppings(){
     const topping = await prisma.toppings.findMany()
+    return topping
+}
+
+export async function getInfoTopping(idTopping){
+    const topping = await prisma.toppings.findUnique({
+        where : {
+            id:idTopping["id"]
+        }
+    })
     return topping
 }
 

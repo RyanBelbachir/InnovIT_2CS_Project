@@ -1,15 +1,15 @@
 import { Router } from "express";
-import { getCategories, getDrinkCategory, getDrinkInfo, getToppings } from "../services/distributeur.js";
+import { getCategories, getDrinkCategory, getDrinkInfo, getToppings, getInfoTopping } from "../services/distributeur.js";
 
 const router = Router();
 
 router.get(
   "/categories",
-  (req, res) => {
+  async (req, res) => {
     try {
       console.log("Getting All Categories");
-      let info = getCategories();
-      res.status(200).send({ message: "Success !!",id:info.id });
+      let info = await getCategories();
+      res.status(200).send(info);
     } catch (e) {
       console.log(e);
       res.status(404).send({ message: "Failed !!" });
@@ -19,11 +19,12 @@ router.get(
 
 router.get(
     "/drink/:id",
-    (req, res) => {
+    async (req, res) => {
       try {
         console.log("Getting info Drink");
-        let info = getDrinkInfo(req.body);
-        res.status(200).send({ message: "Success !!",id:info.id });
+        let info = await getDrinkInfo(req.body);
+        console.log(req.body);
+        res.status(200).send(info);
       } catch (e) {
         console.log(e);
         res.status(404).send({ message: "Failed !!" });
@@ -33,11 +34,11 @@ router.get(
   
   router.get(
     "/category/drink",
-    (req, res) => {
+    async (req, res) => {
       try {
         console.log("Getting Drink of category");
-        let info = getDrinkCategory(req.body);
-        res.status(200).send({ message: "Success !!",id:info.id });
+        let info = await getDrinkCategory(req.body);
+        res.status(200).send(info);
       } catch (e) {
         console.log(e);
         res.status(404).send({ message: "Failed !!" });
@@ -46,12 +47,25 @@ router.get(
   );
    
   router.get(
-    "/topping/:id",
-    (req, res) => {
+    "/topping",
+    async (req, res) => {
       try {
         console.log("Getting Toppings");
-        let info = getToppings();
-        res.status(200).send({ message: "Success !!",id:info.id });
+        let info = await getToppings();
+        res.status(200).send(info);
+      } catch (e) {
+        console.log(e);
+        res.status(404).send({ message: "Failed !!" });
+      }
+    }
+  );
+  router.get(
+    "/topping/:id",
+    async (req, res) => {
+      try {
+        console.log("Getting Toppings");
+        let info = await getInfoTopping(req.body);
+        res.status(200).send(info);
       } catch (e) {
         console.log(e);
         res.status(404).send({ message: "Failed !!" });
