@@ -40,19 +40,12 @@ export async function getToppings(){
 
 export async function getInfoTopping(idTopping){
     const topping = await prisma.toppings.findUnique({
-        where : {
+        where : { 
             id:idTopping["id"]
         }
     })
     return topping
 }
 
-export function saveFacture() {
-
-}
-
-export function saveCommand() {
-
-}
 
 
