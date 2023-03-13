@@ -46,6 +46,9 @@ export async function getInfoTopping(idTopping){
     })
     return topping
 }
-
+export function add(x,y)
+{
+    return x+y
+}
 
 
